@@ -1,0 +1,9 @@
+{
+  "name": "declarativeweb",
+  "version": "0.0.1",
+  "description": "A declarative web framework",
+  "main": "index.js",
+  "repository": "git@github.com:acro5piano/declarativeweb",
+  "author": "gosho-kazuya <ketsume0211@gmail.com>",
+  "license": "MIT"
+}
