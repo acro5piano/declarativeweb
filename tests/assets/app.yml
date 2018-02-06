@@ -1,0 +1,9 @@
+- uri: /
+  method: get
+  return:
+    json:
+      message: 'Hello Declarative Web'
+- uri: /login
+  method: get
+  return:
+    template: './form.html'
