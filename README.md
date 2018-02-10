@@ -9,7 +9,7 @@ Write this YAML:
 ```yaml
 - uri: /
   method: get
-  return:
+  response:
     json:
       message: 'Hello Declarative Web'
 ```

@@ -1,8 +1,31 @@
 - uri: /
+  desctiption: Send json
   method: get
-  return:
-    message: 'Hello Declarative Web'
+  response:
+    json:
+      message: 'Hello Declarative Web'
 - uri: /login
+  desctiption: send static file
   method: get
-  return:
+  response:
     template: './form.html'
+- uri: /register
+  desctiption: Register new user
+  method: post
+  params:
+    email: 'required|email|max:255|unique:users'
+    password: 'required|min:8'
+  database:
+    sql: insert into users (email, password) values ($email, $password)
+  response:
+    json:
+      message: 'Welcome to Declarative Web!'
+- uri: /login
+  desctiption: Find user and login with JWT
+  method: post
+  params:
+    email: 'required|email|max:255'
+    password: 'required|min:8'
+  response:
+    json:
+      message: 'Welcome back!'

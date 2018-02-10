@@ -1,0 +1,4 @@
+- table: users
+  columns:
+    email: string
+    password: string
