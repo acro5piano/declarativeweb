@@ -5,8 +5,10 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
-    }
+      filename : __dirname + '/dev.sqlite3',
+      charset  : 'utf8'
+    },
+    useNullAsDefault: true
   },
 
   staging: {

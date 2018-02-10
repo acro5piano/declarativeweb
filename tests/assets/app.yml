@@ -16,7 +16,11 @@
     email: 'required|email|max:255|unique:users'
     password: 'required|min:8'
   database:
-    sql: insert into users (email, password) values ($email, $password)
+    insert:
+      model: User
+      values:
+        - $email
+        - $password
   response:
     json:
       message: 'Welcome to Declarative Web!'
@@ -29,3 +33,9 @@
   response:
     json:
       message: 'Welcome back!'
+
+- uri: /users
+  method: get
+  response:
+    collection:
+      model: User

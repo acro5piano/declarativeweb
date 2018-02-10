@@ -4,6 +4,8 @@ const _ = require('lodash')
 const fs = require('fs')
 const bodyParser = require('body-parser')
 
+const models = require('./db')
+
 app.use(bodyParser.json())
 
 module.exports = (yamlString) => {
@@ -11,13 +13,22 @@ module.exports = (yamlString) => {
 
   routes.forEach(route => {
     app[route.method](route.uri, (req, res) => {
-      console.log(req.body)
+      if (_.has(route, 'database')) {
+        const model = models[route.database.insert.model]
+        model.forge(req.body).save()
+      }
+
       if (_.has(route.response, 'json')) {
         res.json(route.response.json)
       } else if (_.has(route.response, 'template')) {
         fs.readFile(__dirname + '/../tests/assets/' + route.response.template, (err, data) => {
           res.set('Content-Type', 'text/html');
           res.send(data)
+        })
+      } else if (_.has(route.response, 'collection')) {
+        const model = models[route.response.collection.model]
+        model.fetchAll().then(users => {
+          res.json(users.toJSON())
         })
       } else {
         // Throw NoAvailableResponseError
