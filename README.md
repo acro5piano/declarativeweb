@@ -49,3 +49,9 @@ And more.
 Actually these stuff is just boilerplate.
 
 How easy if we could build web without boilerplate. We can focus our business logic.
+
+# TODO
+
+- [ ] paramas
+- [ ] db connection
+- [ ] model definition

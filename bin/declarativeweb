@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+const web = require(__dirname + '/../src')
+const fs = require('fs')
+
+fs.readFile(__dirname + '/../tests/assets/app.yml', 'utf8', (err, routes) => {
+  web(routes)
+})
