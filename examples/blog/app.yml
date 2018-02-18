@@ -1,0 +1,43 @@
+- uri: /articles
+  desctiption: show articles
+  method: get
+  response:
+    collection:
+      model: articles
+- uri: /articles/:id
+  desctiption: show an article
+  method: get
+  response:
+    database:
+      model: Article
+      where: id = $id
+- uri: /register
+  desctiption: register new user
+  method: post
+  params:
+    email: 'required|email|max:255|unique:users'
+    password: 'required|min:8'
+  database:
+    create:
+      model: User
+      values:
+        - $email
+        - $password
+      as: $user
+  response:
+    json: $user
+- uri: /articles
+  desctiption: create article
+  method: post
+  params:
+    user_id: 'required|numeric'
+    content: 'required|email|max:255|unique:users'
+  database:
+    create:
+      model: Article
+      values:
+        - $user_id
+        - $content
+      as: $article
+  response:
+    json: $article

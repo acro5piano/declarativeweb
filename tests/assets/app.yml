@@ -16,7 +16,7 @@
     email: 'required|email|max:255|unique:users'
     password: 'required|min:8'
   database:
-    insert:
+    create:
       model: User
       values:
         - $email

@@ -1,0 +1,14 @@
+- name: User
+  attributes:
+    - id: increments
+    - email: string
+    - password: string
+  relations:
+    - articles
+- name: Article
+  attributes:
+    - id: increments
+    - user_id: integer
+    - content: text
+  relations:
+    - user

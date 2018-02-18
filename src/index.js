@@ -4,17 +4,21 @@ const _ = require('lodash')
 const fs = require('fs')
 const bodyParser = require('body-parser')
 
-const db = require('./modules/db')
+const database = require('./modules/database')
+
+const modelParser = require('./parseModel')
 
 app.use(bodyParser.json())
 
-module.exports = (yamlString) => {
-  const routes = yaml.load(yamlString)
+module.exports = (app, models) => {
+  const User = modelParser.parse(models.User)
+
+  const routes = yaml.load(app)
 
   routes.forEach(route => {
     app[route.method](route.uri, (req, res) => {
       if (_.has(route, 'database')) {
-        const model = db[route.database.insert.model]
+        const model = database[route.database.insert.model]
         model.forge(req.body).save()
       }
 
@@ -26,7 +30,7 @@ module.exports = (yamlString) => {
           res.send(data)
         })
       } else if (_.has(route.response, 'collection')) {
-        const model = db[route.response.collection.model]
+        const model = database[route.response.collection.model]
         model.fetchAll().then(users => {
           res.json(users.toJSON())
         })
