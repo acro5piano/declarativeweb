@@ -1,10 +1,16 @@
-const knexConfig = require('knexfile.js').development
-const knex = require('knex')(knexConfig)
+const _ = require('lodash')
 
-const bookshelf = require('bookshelf')(knex)
+module.exports = (req, res, models, action) => {
+  const model = models[action.model]
 
-const User = bookshelf.Model.extend({
-  tableName: 'users'
-})
-
-module.exports = { User }
+  if (_.has(action, 'create')) {
+    const attributes = _(action.create.values)
+      .map(value => value.replace('$', ''))
+      .map(value => ({ name: value, value: req.body[value]}))
+      .mapKeys('name')
+      .mapValues(value => value.value)
+      .value()
+    console.log(models, action.model)
+    model.forge(attributes).save()
+  }
+}

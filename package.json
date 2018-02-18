@@ -13,11 +13,12 @@
     "js-yaml": "^3.10.0",
     "knex": "^0.14.3",
     "lodash": "^4.17.5",
+    "pluralize": "^7.0.0",
     "sqlite3": "^3.1.13"
   },
   "scripts": {
     "start": "NODE_PATH=. ./bin/declarativeweb ./tests/assets/app.yml",
-    "dev": "NODE_PATH=. nodemon ./bin/declarativeweb ./tests/assets/app.yml"
+    "dev": "NODE_PATH=. nodemon ./bin/declarativeweb ./examples/blog/app.yml ./examples/blog/models.yml"
   },
   "bin": "./bin/declarativeweb",
   "devDependencies": {

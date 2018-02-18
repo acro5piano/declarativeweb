@@ -4,9 +4,12 @@ const web = require(__dirname + '/../src')
 const fs = require('fs')
 
 const appFile = process.argv[2]
+const modelFile = process.argv[3]
 
 console.log('using config file', appFile)
 
 fs.readFile(appFile, 'utf8', (err, routes) => {
-  web(routes)
+  fs.readFile(modelFile, 'utf8', (err, models) => {
+    web(routes, models)
+  })
 })

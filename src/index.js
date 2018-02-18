@@ -10,16 +10,19 @@ const modelParser = require('./parseModel')
 
 app.use(bodyParser.json())
 
-module.exports = (app, models) => {
-  const User = modelParser.parse(models.User)
+module.exports = (appDefinition, modelDefinition) => {
+  const models = _(yaml.load(modelDefinition))
+    .map(obj => modelParser.parse(obj))
+    .keyBy('name')
+    .mapValues(wrap => wrap.model)
+    .value()
 
-  const routes = yaml.load(app)
+  const routes = yaml.load(appDefinition)
 
   routes.forEach(route => {
     app[route.method](route.uri, (req, res) => {
       if (_.has(route, 'database')) {
-        const model = database[route.database.insert.model]
-        model.forge(req.body).save()
+        database(req, res, models, route.database)
       }
 
       if (_.has(route.response, 'json')) {

@@ -3,10 +3,18 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary()
     table.string('email')
     table.string('password')
+  }).then(() => {
+    return knex.schema.createTable('articles', table => {
+      table.increments('id').primary()
+      table.integer('user_id')
+      table.string('content')
+    })
   })
 }
 
 exports.down = function(knex, Promise) {
-  // return Promise
-  return knex.schema.dropTable('users')
+  return knex.schema.dropTable('users').then(() => {
+    knex.schema.dropTable('articles')
+  })
 }
+
