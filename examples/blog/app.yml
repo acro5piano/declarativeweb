@@ -1,9 +1,3 @@
-- uri: /
-  desctiption: welcome page
-  method: get
-  response:
-    json:
-      message: hello
 - uri: /register
   desctiption: register new user
   method: post

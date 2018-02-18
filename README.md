@@ -1,6 +1,6 @@
 # Declarative Web
 
-Experimental project to development server side programming with almost only YAML format file.
+Development REST API in declarative way.
 
 # Example
 
@@ -14,7 +14,7 @@ Write this YAML:
       message: 'Hello Declarative Web'
 ```
 
-This create the following route:
+This create the following api endpoint:
 
 ```
 $ curl -Ss localhost:3000/ | jq .
