@@ -1,4 +1,4 @@
-const knexConfig = require('../knexfile.js').development
+const knexConfig = require('knexfile.js').development
 const knex = require('knex')(knexConfig)
 
 const bookshelf = require('bookshelf')(knex)

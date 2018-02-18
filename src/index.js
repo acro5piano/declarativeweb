@@ -4,7 +4,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const bodyParser = require('body-parser')
 
-const models = require('./db')
+const db = require('./modules/db')
 
 app.use(bodyParser.json())
 
@@ -14,7 +14,7 @@ module.exports = (yamlString) => {
   routes.forEach(route => {
     app[route.method](route.uri, (req, res) => {
       if (_.has(route, 'database')) {
-        const model = models[route.database.insert.model]
+        const model = db[route.database.insert.model]
         model.forge(req.body).save()
       }
 
@@ -26,7 +26,7 @@ module.exports = (yamlString) => {
           res.send(data)
         })
       } else if (_.has(route.response, 'collection')) {
-        const model = models[route.response.collection.model]
+        const model = db[route.response.collection.model]
         model.fetchAll().then(users => {
           res.json(users.toJSON())
         })

@@ -3,6 +3,10 @@
 const web = require(__dirname + '/../src')
 const fs = require('fs')
 
-fs.readFile(__dirname + '/../tests/assets/app.yml', 'utf8', (err, routes) => {
+const appFile = process.argv[2]
+
+console.log('using config file', appFile)
+
+fs.readFile(appFile, 'utf8', (err, routes) => {
   web(routes)
 })

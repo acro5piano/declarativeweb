@@ -16,7 +16,11 @@
     "sqlite3": "^3.1.13"
   },
   "scripts": {
-    "start": "./bin/declarativeweb"
+    "start": "NODE_PATH=. ./bin/declarativeweb ./tests/assets/app.yml",
+    "dev": "NODE_PATH=. nodemon ./bin/declarativeweb ./tests/assets/app.yml"
   },
-  "bin": "./bin/declarativeweb"
+  "bin": "./bin/declarativeweb",
+  "devDependencies": {
+    "nodemon": "^1.15.0"
+  }
 }
