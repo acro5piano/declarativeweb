@@ -1,0 +1,32 @@
+- uri: /tasks
+  desctiption: show tasks
+  method: get
+  response:
+    collection:
+      model: Task
+- uri: /tasks
+  desctiption: create a task
+  method: post
+  params:
+    name: 'required|max:255'
+  database:
+    model: Task
+    create:
+      values:
+        - $name
+      as: $task
+  response:
+    json: $task
+- uri: /tasks/:id/
+  desctiption: complete a task
+  method: put
+  params:
+    is_done: 'required|boolean'
+  database:
+    model: Task
+    update:
+      values:
+        - $is_done
+      as: $task
+  response:
+    json: $task

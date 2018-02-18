@@ -1,0 +1,5 @@
+- name: Task
+  attributes:
+    - id: increments
+    - name: string
+    - is_done: boolean
