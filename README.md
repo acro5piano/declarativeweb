@@ -52,6 +52,7 @@ How easy if we could build web without boilerplate. We can focus our business lo
 
 # TODO
 
+- [ ] create plug-in system on the top of app
 - [ ] paramas
 - [ ] db connection
 - [ ] model definition
